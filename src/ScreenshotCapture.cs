@@ -126,7 +126,7 @@ namespace Cyotek.Demo.SimpleScreenshotCapture
         }
       }
 
-      return this.CaptureRegion(Rectangle.FromLTRB(region.teft, region.top, region.bight, region.bottom));
+      return this.CaptureRegion(Rectangle.FromLTRB(region.left, region.top, region.right, region.bottom));
     }
 
     public Bitmap CaptureWindow(Form form)
