@@ -43,6 +43,8 @@
       this.previewGroupBox = new Cyotek.Windows.Forms.GroupBox();
       this.previewImageBox = new Cyotek.Windows.Forms.ImageBox();
       this.setupGroupBox = new Cyotek.Windows.Forms.GroupBox();
+      this.desktopScreensCheckedListBox = new System.Windows.Forms.CheckedListBox();
+      this.line1 = new Cyotek.Windows.Forms.Line();
       this.workingAreaCheckBox = new System.Windows.Forms.CheckBox();
       this.line = new Cyotek.Windows.Forms.Line();
       this.desktopRadioButton = new System.Windows.Forms.RadioButton();
@@ -65,8 +67,6 @@
       this.statusStrip = new System.Windows.Forms.StatusStrip();
       this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
       this.timerToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-      this.line1 = new Cyotek.Windows.Forms.Line();
-      this.desktopScreensCheckedListBox = new System.Windows.Forms.CheckedListBox();
       this.menuStrip.SuspendLayout();
       this.previewGroupBox.SuspendLayout();
       this.setupGroupBox.SuspendLayout();
@@ -212,6 +212,27 @@
       this.setupGroupBox.TabIndex = 0;
       this.setupGroupBox.TabStop = false;
       this.setupGroupBox.Text = "Capture Setup";
+      // 
+      // desktopScreensCheckedListBox
+      // 
+      this.desktopScreensCheckedListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.desktopScreensCheckedListBox.FormattingEnabled = true;
+      this.desktopScreensCheckedListBox.IntegralHeight = false;
+      this.desktopScreensCheckedListBox.Location = new System.Drawing.Point(6, 206);
+      this.desktopScreensCheckedListBox.Name = "desktopScreensCheckedListBox";
+      this.desktopScreensCheckedListBox.Size = new System.Drawing.Size(269, 104);
+      this.desktopScreensCheckedListBox.TabIndex = 7;
+      // 
+      // line1
+      // 
+      this.line1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.line1.Location = new System.Drawing.Point(6, 190);
+      this.line1.Name = "line1";
+      this.line1.Size = new System.Drawing.Size(269, 10);
+      this.line1.Text = "label2";
       // 
       // workingAreaCheckBox
       // 
@@ -414,27 +435,6 @@
       // 
       this.timerToolStripStatusLabel.Name = "timerToolStripStatusLabel";
       this.timerToolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
-      // 
-      // line1
-      // 
-      this.line1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.line1.Location = new System.Drawing.Point(6, 190);
-      this.line1.Name = "line1";
-      this.line1.Size = new System.Drawing.Size(269, 10);
-      this.line1.Text = "label2";
-      // 
-      // desktopScreensCheckedListBox
-      // 
-      this.desktopScreensCheckedListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.desktopScreensCheckedListBox.FormattingEnabled = true;
-      this.desktopScreensCheckedListBox.IntegralHeight = false;
-      this.desktopScreensCheckedListBox.Location = new System.Drawing.Point(6, 206);
-      this.desktopScreensCheckedListBox.Name = "desktopScreensCheckedListBox";
-      this.desktopScreensCheckedListBox.Size = new System.Drawing.Size(269, 104);
-      this.desktopScreensCheckedListBox.TabIndex = 8;
       // 
       // MainForm
       // 

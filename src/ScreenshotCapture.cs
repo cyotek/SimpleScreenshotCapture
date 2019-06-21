@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Cyotek.Windows.Forms;
 
 namespace Cyotek.Demo.SimpleScreenshotCapture
 {
@@ -50,62 +51,31 @@ namespace Cyotek.Demo.SimpleScreenshotCapture
 
     public Bitmap CaptureDesktop(bool workingAreaOnly, Color invalidColor, Predicate<int> includeScreen)
     {
-      Screen[] screens;
+      DesktopLayout layout;
       Bitmap bitmap;
-      int minX;
-      int minY;
-      int maxX;
-      int maxY;
-      int w;
-      int h;
 
-      minX = 0;
-      minY = 0;
-      maxX = 0;
-      maxY = 0;
-      screens = Screen.AllScreens;
-
-      for (int i = 0; i < screens.Length; i++)
+      layout = new DesktopLayout
       {
-        Screen screen;
-        Rectangle bounds;
+        WorkingAreaOnly = workingAreaOnly
+      };
 
-        screen = screens[i];
-        bounds = workingAreaOnly ? screen.WorkingArea : screen.Bounds;
-
-        minX = Math.Min(minX, bounds.X);
-        minY = Math.Min(minY, bounds.Y);
-        maxX = Math.Max(maxX, bounds.Right);
-        maxY = Math.Max(maxY, bounds.Bottom);
-      }
-
-      w = maxX - minX;
-      h = maxY - minY;
-
-      bitmap = new Bitmap(w, h, PixelFormat.Format32bppArgb);
+      bitmap = new Bitmap(layout.Width, layout.Height, PixelFormat.Format32bppArgb);
 
       using (Graphics g = Graphics.FromImage(bitmap))
       {
         g.Clear(invalidColor);
 
-        for (int i = 0; i < screens.Length; i++)
+        for (int i = 0; i < layout.Count; i++)
         {
           if (includeScreen(i))
           {
-            Screen screen;
             Rectangle bounds;
-            int x;
-            int y;
 
-            screen = screens[i];
-            bounds = workingAreaOnly ? screen.WorkingArea : screen.Bounds;
+            bounds = layout.GetDisplayBounds(i);
 
             using (Bitmap displayImage = CaptureRegion(bounds))
             {
-              x = bounds.X - minX;
-              y = bounds.Y - minY;
-
-              g.DrawImageUnscaled(displayImage, new Point(x, y));
+              g.DrawImageUnscaled(displayImage, layout.GetNormalizedDisplayBounds(bounds));
             }
           }
         }
