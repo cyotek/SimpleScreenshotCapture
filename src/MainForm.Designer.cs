@@ -59,10 +59,14 @@
       this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
       this.captureToolStripButton = new System.Windows.Forms.ToolStripButton();
       this.delayCaptureToolStripButton = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+      this.fillToolStripColorPickerSplitButton = new Cyotek.Windows.Forms.ToolStripControllerHosts.ToolStripColorPickerSplitButton();
       this.delayCaptureTimer = new System.Windows.Forms.Timer(this.components);
       this.statusStrip = new System.Windows.Forms.StatusStrip();
       this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
       this.timerToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+      this.line1 = new Cyotek.Windows.Forms.Line();
+      this.desktopScreensCheckedListBox = new System.Windows.Forms.CheckedListBox();
       this.menuStrip.SuspendLayout();
       this.previewGroupBox.SuspendLayout();
       this.setupGroupBox.SuspendLayout();
@@ -102,14 +106,14 @@
       this.captureToolStripMenuItem.Image = global::Cyotek.Demo.SimpleScreenshotCapture.Properties.Resources.Capture;
       this.captureToolStripMenuItem.Name = "captureToolStripMenuItem";
       this.captureToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
-      this.captureToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.captureToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
       this.captureToolStripMenuItem.Text = "&Capture";
       this.captureToolStripMenuItem.Click += new System.EventHandler(this.captureToolStripMenuItem_Click);
       // 
       // toolStripSeparator
       // 
       this.toolStripSeparator.Name = "toolStripSeparator";
-      this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
+      this.toolStripSeparator.Size = new System.Drawing.Size(144, 6);
       // 
       // saveToolStripMenuItem
       // 
@@ -117,19 +121,19 @@
       this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
       this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-      this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.saveToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
       this.saveToolStripMenuItem.Text = "&Save...";
       this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+      this.toolStripSeparator1.Size = new System.Drawing.Size(144, 6);
       // 
       // exitToolStripMenuItem
       // 
       this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-      this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
       this.exitToolStripMenuItem.Text = "E&xit";
       this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
       // 
@@ -191,6 +195,8 @@
       // 
       // setupGroupBox
       // 
+      this.setupGroupBox.Controls.Add(this.desktopScreensCheckedListBox);
+      this.setupGroupBox.Controls.Add(this.line1);
       this.setupGroupBox.Controls.Add(this.workingAreaCheckBox);
       this.setupGroupBox.Controls.Add(this.line);
       this.setupGroupBox.Controls.Add(this.desktopRadioButton);
@@ -314,7 +320,9 @@
             this.copyToolStripButton,
             this.toolStripSeparator7,
             this.captureToolStripButton,
-            this.delayCaptureToolStripButton});
+            this.delayCaptureToolStripButton,
+            this.toolStripSeparator2,
+            this.fillToolStripColorPickerSplitButton});
       this.toolStrip.Location = new System.Drawing.Point(0, 24);
       this.toolStrip.Name = "toolStrip";
       this.toolStrip.Size = new System.Drawing.Size(867, 25);
@@ -368,6 +376,18 @@
       this.delayCaptureToolStripButton.Text = "&Delay Capture";
       this.delayCaptureToolStripButton.Click += new System.EventHandler(this.delayCaptureToolStripButton_Click);
       // 
+      // toolStripSeparator2
+      // 
+      this.toolStripSeparator2.Name = "toolStripSeparator2";
+      this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+      // 
+      // fillToolStripColorPickerSplitButton
+      // 
+      this.fillToolStripColorPickerSplitButton.Color = System.Drawing.Color.White;
+      this.fillToolStripColorPickerSplitButton.Image = global::Cyotek.Demo.SimpleScreenshotCapture.Properties.Resources.Fill;
+      this.fillToolStripColorPickerSplitButton.Name = "fillToolStripColorPickerSplitButton";
+      this.fillToolStripColorPickerSplitButton.Size = new System.Drawing.Size(32, 22);
+      // 
       // delayCaptureTimer
       // 
       this.delayCaptureTimer.Interval = 1000;
@@ -394,6 +414,27 @@
       // 
       this.timerToolStripStatusLabel.Name = "timerToolStripStatusLabel";
       this.timerToolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
+      // 
+      // line1
+      // 
+      this.line1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.line1.Location = new System.Drawing.Point(6, 190);
+      this.line1.Name = "line1";
+      this.line1.Size = new System.Drawing.Size(269, 10);
+      this.line1.Text = "label2";
+      // 
+      // desktopScreensCheckedListBox
+      // 
+      this.desktopScreensCheckedListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.desktopScreensCheckedListBox.FormattingEnabled = true;
+      this.desktopScreensCheckedListBox.IntegralHeight = false;
+      this.desktopScreensCheckedListBox.Location = new System.Drawing.Point(6, 206);
+      this.desktopScreensCheckedListBox.Name = "desktopScreensCheckedListBox";
+      this.desktopScreensCheckedListBox.Size = new System.Drawing.Size(269, 104);
+      this.desktopScreensCheckedListBox.TabIndex = 8;
       // 
       // MainForm
       // 
@@ -461,6 +502,10 @@
     private System.Windows.Forms.StatusStrip statusStrip;
     private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     private System.Windows.Forms.ToolStripStatusLabel timerToolStripStatusLabel;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+    private Cyotek.Windows.Forms.ToolStripControllerHosts.ToolStripColorPickerSplitButton fillToolStripColorPickerSplitButton;
+    private System.Windows.Forms.CheckedListBox desktopScreensCheckedListBox;
+    private Windows.Forms.Line line1;
   }
 }
 

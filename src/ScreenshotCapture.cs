@@ -1,6 +1,6 @@
 ﻿// Capturing screenshots using C# and p/invoke
 // http://www.cyotek.com/blog/capturing-screenshots-using-csharp-and-p-invoke
-// Copyright © 2017 Cyotek Ltd. All Rights Reserved.
+// Copyright © 2017-2019 Cyotek Ltd. All Rights Reserved.
 
 // This work is licensed under the Creative Commons Attribution 4.0 International License.
 // To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.
@@ -8,6 +8,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -15,7 +16,7 @@ namespace Cyotek.Demo.SimpleScreenshotCapture
 {
   internal sealed class ScreenshotCapture
   {
-    #region Methods
+    #region Public Methods
 
     public Bitmap CaptureActiveWindow()
     {
@@ -29,23 +30,88 @@ namespace Cyotek.Demo.SimpleScreenshotCapture
 
     public Bitmap CaptureDesktop(bool workingAreaOnly)
     {
-      Rectangle desktop;
-      Screen[] screens;
+      return this.CaptureDesktop(workingAreaOnly, Color.Transparent);
+    }
 
-      desktop = Rectangle.Empty;
+    public Bitmap CaptureDesktop(Color invalidColor)
+    {
+      return this.CaptureDesktop(false, invalidColor);
+    }
+
+    public Bitmap CaptureDesktop(bool workingAreaOnly, Color invalidColor)
+    {
+      return CaptureDesktop(workingAreaOnly, invalidColor, index => true);
+    }
+
+    public Bitmap CaptureDesktop(Predicate<int> includeScreen)
+    {
+      return CaptureDesktop(false, Color.Transparent, includeScreen);
+    }
+
+    public Bitmap CaptureDesktop(bool workingAreaOnly, Color invalidColor, Predicate<int> includeScreen)
+    {
+      Screen[] screens;
+      Bitmap bitmap;
+      int minX;
+      int minY;
+      int maxX;
+      int maxY;
+      int w;
+      int h;
+
+      minX = 0;
+      minY = 0;
+      maxX = 0;
+      maxY = 0;
       screens = Screen.AllScreens;
 
-      // ReSharper disable once LoopCanBeConvertedToQuery
       for (int i = 0; i < screens.Length; i++)
       {
         Screen screen;
+        Rectangle bounds;
 
         screen = screens[i];
+        bounds = workingAreaOnly ? screen.WorkingArea : screen.Bounds;
 
-        desktop = Rectangle.Union(desktop, workingAreaOnly ? screen.WorkingArea : screen.Bounds);
+        minX = Math.Min(minX, bounds.X);
+        minY = Math.Min(minY, bounds.Y);
+        maxX = Math.Max(maxX, bounds.Right);
+        maxY = Math.Max(maxY, bounds.Bottom);
       }
 
-      return this.CaptureRegion(desktop);
+      w = maxX - minX;
+      h = maxY - minY;
+
+      bitmap = new Bitmap(w, h, PixelFormat.Format32bppArgb);
+
+      using (Graphics g = Graphics.FromImage(bitmap))
+      {
+        g.Clear(invalidColor);
+
+        for (int i = 0; i < screens.Length; i++)
+        {
+          if (includeScreen(i))
+          {
+            Screen screen;
+            Rectangle bounds;
+            int x;
+            int y;
+
+            screen = screens[i];
+            bounds = workingAreaOnly ? screen.WorkingArea : screen.Bounds;
+
+            using (Bitmap displayImage = CaptureRegion(bounds))
+            {
+              x = bounds.X - minX;
+              y = bounds.Y - minY;
+
+              g.DrawImageUnscaled(displayImage, new Point(x, y));
+            }
+          }
+        }
+      }
+
+      return bitmap;
     }
 
     public Bitmap CaptureMonitor(Screen monitor)
@@ -134,6 +200,6 @@ namespace Cyotek.Demo.SimpleScreenshotCapture
       return this.CaptureWindow(form.Handle);
     }
 
-    #endregion
+    #endregion Public Methods
   }
 }

@@ -1,6 +1,6 @@
 ﻿// Capturing screenshots using C# and p/invoke
 // http://www.cyotek.com/blog/capturing-screenshots-using-csharp-and-p-invoke
-// Copyright © 2017 Cyotek Ltd. All Rights Reserved.
+// Copyright © 2017-2019 Cyotek Ltd. All Rights Reserved.
 
 // This work is licensed under the Creative Commons Attribution 4.0 International License.
 // To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.
@@ -18,32 +18,37 @@ namespace Cyotek.Demo.SimpleScreenshotCapture
 {
   internal partial class MainForm : Form
   {
-    #region Fields
+    #region Private Fields
 
     private Bitmap _preview;
 
     private int _timer;
 
-    #endregion
+    #endregion Private Fields
 
-    #region Constructors
+    #region Public Constructors
 
     public MainForm()
     {
       this.InitializeComponent();
     }
 
-    #endregion
+    #endregion Public Constructors
 
-    #region Methods
+    #region Protected Methods
 
     protected override void OnShown(EventArgs e)
     {
       this.InitializeMonitorList();
+
       currentWindowRadioButton.Checked = true;
 
       base.OnShown(e);
     }
+
+    #endregion Protected Methods
+
+    #region Private Methods
 
     private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
@@ -77,7 +82,7 @@ namespace Cyotek.Demo.SimpleScreenshotCapture
       }
       else
       {
-        result = capture.CaptureDesktop(onlyCaptureWorkingArea);
+        result = capture.CaptureDesktop(onlyCaptureWorkingArea, fillToolStripColorPickerSplitButton.Color, i => desktopScreensCheckedListBox.GetItemChecked(i));
       }
 
       this.UpdatePreview(result);
@@ -149,7 +154,12 @@ namespace Cyotek.Demo.SimpleScreenshotCapture
 
       for (int i = 0; i < screens.Length; i++)
       {
-        monitorComboBox.Items.Add(screens[i].DeviceName);
+        string name;
+
+        name = screens[i].DeviceName;
+
+        monitorComboBox.Items.Add(name);
+        desktopScreensCheckedListBox.Items.Add(name, true);
       }
 
       monitorComboBox.SelectedIndex = 0;
@@ -186,11 +196,11 @@ namespace Cyotek.Demo.SimpleScreenshotCapture
       else
       {
         using (SaveFileDialog dialog = new SaveFileDialog
-                                       {
-                                         Title = "Save Image As",
-                                         Filter = "PNG Files (*.png)|*.png",
-                                         DefaultExt = "png"
-                                       })
+        {
+          Title = "Save Image As",
+          Filter = "PNG Files (*.png)|*.png",
+          DefaultExt = "png"
+        })
         {
           if (dialog.ShowDialog(this) == DialogResult.OK)
           {
@@ -220,6 +230,6 @@ namespace Cyotek.Demo.SimpleScreenshotCapture
       timerToolStripStatusLabel.Text = _timer >= 0 ? _timer + "s" : string.Empty;
     }
 
-    #endregion
+    #endregion Private Methods
   }
 }
